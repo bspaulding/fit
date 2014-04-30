@@ -14,17 +14,16 @@ module Fit
       send(action, *args)
     end
 
-    def checkout(ticket_number)
-      refname = refname_for_ticket(ticket_number)
+    def checkout(substring)
+      refname = refname_for_substring(substring)
       log "Found ref '#{refname}'"
       run_git "checkout #{refname}"
     end
 
     private
 
-    # ticket_number is the JIRA issue id, including project acronym: DEV-12345
-    def refname_for_ticket(ticket_number)
-      %x[git branch -r | grep 'DEV-36583'].split("\n").map(&:strip).first
+    def refname_for_substring(substring)
+      %x[git branch -r | grep '#{substring}'].split("\n").map(&:strip).first
     end
 
     def log(message)
