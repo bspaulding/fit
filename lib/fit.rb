@@ -6,6 +6,14 @@ module Fit
       new.run(args.first, *args[1..-1] || [])
     end
 
+    def runner
+      @runner ||= ->(command_string) { `#{command_string}` }
+    end
+
+    def runner=(new_runner)
+      @runner = new_runner
+    end
+
     def run(action, args)
       unless respond_to?(action)
         raise "#{action} is not a supported action."
@@ -33,7 +41,7 @@ module Fit
     def run_git(command_string)
       command_string = "git #{command_string}"
       log command_string
-      `#{command_string}`
+      runner.call(command_string)
     end
   end
 end
