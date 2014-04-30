@@ -1,6 +1,6 @@
 # Fit
 
-TODO: Write a gem description
+git cli wrapper that adds fuzzy matching on ref names.
 
 ## Installation
 
