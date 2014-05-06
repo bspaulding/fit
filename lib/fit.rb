@@ -31,7 +31,7 @@ module Fit
     private
 
     def refname_for_substring(substring)
-      %x[git branch -r | grep '#{substring}'].split("\n").map(&:strip).first
+      %x[git branch -a | grep '#{substring}'].split("\n").map(&:strip).first
     end
 
     def log(message)
